@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Loan Management System</h1>
+    <section>
+        <h2>Lend Money</h2>
+        <form id="lend-form">
+            <label for="customer-id">Customer ID:</label>
+            <input type="text" id="customer-id" name="customer-id" required>
+            <label for="loan-amount">Loan Amount:</label>
+            <input type="number" id="loan-amount" name="loan-amount" required>
+            <label for="loan-period">Loan Period (years):</label>
+            <input type="number" id="loan-period" name="loan-period" required>
+            <label for="interest-rate">Interest Rate (%):</label>
+            <input type="number" id="interest-rate" name="interest-rate" step="0.01" required>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="lend-results"></div>
+    </section>
+
+    <section>
+        <h2>Make Payment</h2>
+        <form id="payment-form">
+            <label for="payment-loan-id">Loan ID:</label>
+            <input type="text" id="payment-loan-id" name="payment-loan-id" required>
+            <label for="payment-amount">Payment Amount:</label>
+            <input type="number" id="payment-amount" name="payment-amount" required>
+            <button type="submit">Make Payment</button>
+        </form>
+        <div id="payment-results"></div>
+    </section>
+
+    <section>
+        <h2>View Ledger</h2>
+        <form id="ledger-form">
+            <label for="ledger-loan-id">Loan ID:</label>
+            <input type="text" id="ledger-loan-id" name="ledger-loan-id" required>
+            <button type="submit">View Ledger</button>
+        </form>
+        <div id="ledger-results"></div>
+    </section>
+
+    <section>
+        <h2>Account Overview</h2>
+        <button id="overview-button">View All Loans</button>
+        <div id="overview-results"></div>
+    </section>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
