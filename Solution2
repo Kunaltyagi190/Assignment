@@ -1,0 +1,45 @@
+#CODE 2
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <iomanip>
+#include <algorithm> 
+
+using namespace std;
+
+string formatIndianCurrency(float number) {
+    ostringstream oss;
+    oss << fixed << setprecision(4) << number;
+    string numStr = oss.str();
+    
+    size_t dotPos = numStr.find('.');
+    string integerPart = numStr.substr(0, dotPos);
+    string decimalPart = (dotPos == string::npos) ? "" : numStr.substr(dotPos);
+    
+    string result;
+    int len = integerPart.length();
+    int count = 0;
+    
+    for (int i = len - 1; i >= 0; --i) {
+        result += integerPart[i];
+        ++count;
+        if ((count == 2 && i > 0) || (count == 5 && i > 0)) {
+            result += ',';
+            count = 0;
+        }
+    }
+    
+    reverse(result.begin(), result.end());
+    result += decimalPart;
+    
+    return result;
+}
+
+int main() {
+    float number;
+    cout << "Enter a number: ";
+    cin >> number;
+    
+    cout << "Indian Currency Format: " << formatIndianCurrency(number) << endl;
+    return 0;
+}
