@@ -1,0 +1,55 @@
+#CODE 3
+#include <iostream>
+#include <vector>
+#include <algorithm> 
+
+using namespace std;
+
+struct Element {
+    vector<int> positions;
+    vector<int> values;
+};
+
+vector<Element> combineLists(const vector<Element>& list1, const vector<Element>& list2) {
+    vector<Element> all = list1;
+    all.insert(all.end(), list2.begin(), list2.end());
+    
+    sort(all.begin(), all.end(), [](const Element& a, const Element& b) {
+        return a.positions[0] < b.positions[0];
+    });
+    
+    vector<Element> combined;
+    
+    for (const auto& elem : all) {
+        if (combined.empty() || combined.back().positions[1] < elem.positions[0]) {
+            combined.push_back(elem);
+        } else {
+            combined.back().positions[1] = max(combined.back().positions[1], elem.positions[1]);
+            combined.back().values.insert(combined.back().values.end(), elem.values.begin(), elem.values.end());
+        }
+    }
+    
+    return combined;
+}
+
+void printList(const vector<Element>& list) {
+    for (const auto& e : list) {
+        cout << "Positions: [" << e.positions[0] << ", " << e.positions[1] << "] Values: ";
+        for (const auto& v : e.values) {
+            cout << v << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    vector<Element> list1 = {{{1, 5}, {10, 20}}, {{6, 10}, {30, 40}}};
+    vector<Element> list2 = {{{4, 8}, {50, 60}}, {{11, 15}, {70, 80}}};
+    
+    vector<Element> result = combineLists(list1, list2);
+    
+    cout << "Combined List:" << endl;
+    printList(result);
+    
+    return 0;
+}
